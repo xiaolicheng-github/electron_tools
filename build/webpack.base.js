@@ -18,12 +18,60 @@ module.exports = {
           options: {
             // 预设执行顺序由右往左,所以先处理ts,再处理jsx
             presets: [
+              [
+                "@babel/preset-env",
+                {
+                  // .browserslistrc 兼容此文件内写入的版本
+                  "useBuiltIns": "usage", // 根据配置的浏览器兼容,以及代码中使用到的api进行引入polyfill按需添加
+                  "corejs": 3, // 配置使用core-js低版本
+                },
+              ],
               '@babel/preset-react',
               '@babel/preset-typescript'
             ]
           }
         }
-      }
+      },
+      {
+        test: /\.(css|scss)$/, //匹配 css 文件
+        use: ['style-loader', 'css-loader', 'sass-loader']
+      },
+      {
+        test:/.(png|jpg|jpeg|gif|svg)$/, // 匹配图片文件
+        type: "asset", // type选择asset
+        parser: {
+          dataUrlCondition: {
+            maxSize: 10 * 1024, // 小于10kb转base64位
+          }
+        },
+        generator:{ 
+          filename:'static/images/[name][ext]', // 文件输出目录和命名
+        },
+      },
+      {
+        test:/.(woff2?|eot|ttf|otf)$/, // 匹配字体图标文件
+        type: "asset", // type选择asset
+        parser: {
+          dataUrlCondition: {
+            maxSize: 10 * 1024, // 小于10kb转base64位
+          }
+        },
+        generator:{ 
+          filename:'static/fonts/[name][ext]', // 文件输出目录和命名
+        },
+      },
+      {
+        test:/.(mp4|webm|ogg|mp3|wav|flac|aac)$/, // 匹配媒体文件
+        type: "asset", // type选择asset
+        parser: {
+          dataUrlCondition: {
+            maxSize: 10 * 1024, // 小于10kb转base64位
+          }
+        },
+        generator:{ 
+          filename:'static/media/[name][ext]', // 文件输出目录和命名
+        },
+      },
     ]
   },
   resolve: {
