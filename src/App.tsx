@@ -1,12 +1,15 @@
 import React from 'react';
 import './App.scss';
-import logo from  './static/image/logo.jpg';
+import { routes } from './router';
+import { useRoutes } from 'react-router-dom';
 
+export default function App() {
 
-function App() {
+  const ElementRouter = useRoutes(routes);
+
   return <div className="app-root">
-    <div className='app-header'>里程工具箱</div>
-    <img src={logo}></img>
+    <div className='page-container'>
+      {ElementRouter}
+    </div>
   </div>
 }
-export default App
