@@ -6,7 +6,8 @@
   "scripts": {
     "start": "electron-forge start",
     "package": "electron-forge package",
-    "make": "electron-forge make"
+    "make": "electron-forge make",
+    "server": "node server.js"
   },
   "author": "xiaolicheng-github",
   "license": "ISC",
@@ -20,6 +21,7 @@
     "electron": "^27.0.3"
   },
   "dependencies": {
-    "electron-squirrel-startup": "^1.0.0"
+    "electron-squirrel-startup": "^1.0.0",
+    "express": "^4.18.2"
   }
 }

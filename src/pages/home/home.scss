@@ -1,0 +1,29 @@
+.home-page {
+  .tool-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(80px, 150px));
+    gap: 5px; /* 可以根据需要设置间距 */
+    .tool-list-item {
+      height: 150px;
+      background: #f3f3f3;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: #a4a4a4;
+      transition: all 0.3s;
+      .icon-class {
+        font-size: 36px;
+      }
+      .item-title {
+        margin-top: 15px;
+      }
+      &:hover {
+        cursor: pointer;
+        color: #e7aaaa;
+        background: #f1eaea;
+        box-shadow: 8px 8px 20px rgba(55,99,170,.1);
+      }
+    }
+  }
+}

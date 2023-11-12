@@ -6,6 +6,6 @@ module.exports = merge(baseConfig, {
   output: {
     path: path.join(__dirname, '../desktop/dist'), // 打包结果输出路径
     clean: true, // webpack4需要配置clean-webpack-plugin来删除dist文件,webpack5内置了
-    publicPath: './' // 打包后文件的公共前缀路径
+    publicPath: '/' // 打包后文件的公共前缀路径
   },
 })
