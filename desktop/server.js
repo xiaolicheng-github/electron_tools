@@ -1,10 +1,9 @@
 const express = require("express");
 const http = require("http");
 const path = require("path");
-const net = require("net");
 
 const app = express();
-// let port = process.env.PORT || 3000; // 默认端口为 3000
+let port = process.env.PORT || 3456; // 默认端口为 3000
 
 const server = http.createServer(app);
 
@@ -16,48 +15,56 @@ app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "dist", "index.html"));
 });
 
-function checkPortAvailability(port) {
-  return new Promise((resolve, reject) => {
-    const netServer = net.createServer();
-    netServer.once("error", (err) => {
-      if (err.code === "EADDRINUSE") {
-        reject(`Port ${port} is in use`);
-      } else {
-        reject(err.message);
-      }
-    });
-
-    netServer.once("listening", () => {
-      resolve(port);
-      netServer.close();
-    });
-
-    netServer.listen(port);
+server
+  .listen(port, () => {
+    console.log(`port=${port}`);
+  })
+  .on("error", (err) => {
+    console.error(err);
   });
-}
-async function getPort() {
-  let port = 3000;
 
-  while (true) {
-    try {
-      await checkPortAvailability(port);
-      break;
-    } catch (error) {
-      port++;
-    }
-  }
-  return port;
-}
+// function checkPortAvailability(port) {
+//   return new Promise((resolve, reject) => {
+//     const netServer = net.createServer();
+//     netServer.once("error", (err) => {
+//       if (err.code === "EADDRINUSE") {
+//         reject(`Port ${port} is in use`);
+//       } else {
+//         reject(err.message);
+//       }
+//     });
 
-// 检查端口是否被占用
-async function startServer() {
-  const port = await getPort();
-  server
-    .listen(port, () => {
-      console.log(`port=${port}`);
-    })
-    .on("error", (err) => {
-      console.error(err);
-    });
-}
-startServer();
+//     netServer.once("listening", () => {
+//       resolve(port);
+//       netServer.close();
+//     });
+
+//     netServer.listen(port);
+//   });
+// }
+// async function getPort() {
+//   let port = 3000;
+
+//   while (true) {
+//     try {
+//       await checkPortAvailability(port);
+//       break;
+//     } catch (error) {
+//       port++;
+//     }
+//   }
+//   return port;
+// }
+
+// // 检查端口是否被占用
+// async function startServer() {
+//   const port = await getPort();
+//   server
+//     .listen(port, () => {
+//       console.log(`port=${port}`);
+//     })
+//     .on("error", (err) => {
+//       console.error(err);
+//     });
+// }
+// startServer();
