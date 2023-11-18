@@ -7,7 +7,7 @@ export default function Home() {
   const navigate = useNavigate();
 
   const [routeList] = useState([
-    { path: "/test1", name: "monaco", icon: "icon-code" },
+    { path: "/monaco", name: "monaco", icon: "icon-code" },
     { path: "/test1", name: "test1", icon: "icon-ceshi" },
     { path: "/test2", name: "test2", icon: "icon-ceshi" },
   ]);
@@ -16,9 +16,7 @@ export default function Home() {
     navigate(
       ...routerParams({
         path: item.path,
-        query: {
-          name: "xxx",
-        },
+        query: {},
       })
     );
   }
